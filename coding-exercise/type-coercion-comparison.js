@@ -6,33 +6,60 @@ console.log(null == undefined);  // true
 console.log(null === undefined); // false
 
 /**
- * Explanation:
- * 
- * This demonstrates type coercion with == vs === in JavaScript.
- * 
- * 1. == (loose equality) performs type coercion before comparison.
- *    === (strict equality) does NOT perform type coercion.
- * 
- * 2. [] == false:
- *    - [] is converted to a primitive: [].toString() = ''
- *    - false is converted to a number: 0
- *    - '' is converted to a number: 0
- *    - 0 == 0 is true
- * 
- * 3. [] === false:
- *    - No coercion, different types (object vs boolean), so false
- * 
- * 4. '' == 0:
- *    - '' is coerced to 0, so 0 == 0 is true
- * 
- * 5. '' === 0:
- *    - Different types (string vs number), so false
- * 
- * 6. null == undefined:
- *    - Special case in JavaScript, they are loosely equal
- * 
- * 7. null === undefined:
- *    - Different types, so false
- * 
- * Best practice: Use === to avoid unexpected type coercion bugs.
+ * Rules:
+ *
+ * 1. == (Loose Equality)
+ *    - If types are different, JavaScript performs type coercion.
+ *
+ * 2. === (Strict Equality)
+ *    - No type coercion.
+ *    - Type and value both must be same.
+ *
+ * 3. Object in == comparison
+ *    - Object converts to primitive first.
+ *    - [] becomes '' using toString().
+ *
+ * 4. Boolean in == comparison
+ *    - false becomes 0
+ *    - true becomes 1
+ *
+ * 5. String in == comparison
+ *    - Numeric string converts to number.
+ *    - '' becomes 0
+ *
+ * 6. null and undefined special rule
+ *    - null == undefined → true
+ *    - only in loose equality
+ *
+ * 7. In strict equality:
+ *    - Different types always false.
+ *
+ * -----------------------------------
+ *
+ * Step:
+ *
+ * [] == false
+ * [] → ''
+ * false → 0
+ * '' → 0
+ * 0 == 0 → true
+ *
+ * [] === false
+ * object !== boolean → false
+ *
+ * '' == 0
+ * '' → 0
+ * 0 == 0 → true
+ *
+ * '' === 0
+ * string !== number → false
+ *
+ * null == undefined
+ * special JS rule → true
+ *
+ * null === undefined
+ * different types → false
+ *
+ * Best Practice:
+ * Always use ===
  */
